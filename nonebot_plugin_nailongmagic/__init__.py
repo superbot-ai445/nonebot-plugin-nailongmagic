@@ -1,4 +1,5 @@
 # ruff: noqa: E402
+
 from nonebot import get_plugin_config, require
 from nonebot.plugin import PluginMetadata, inherit_supported_adapters
 
@@ -8,7 +9,7 @@ require("nonebot_plugin_uninfo")
 from . import handler as handler
 from .config import Config
 
-__version__ = "1.0.3"
+__version__ = "1.0.5.post1"
 __plugin_meta__ = PluginMetadata(
     name="奶龙魔法",
     description="世界就是一个巨大的奶龙~",

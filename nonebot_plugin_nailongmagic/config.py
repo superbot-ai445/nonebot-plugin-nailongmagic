@@ -15,7 +15,7 @@ class Config(BaseModel):
     nailongmagic_priority: int = 100
 
     nailongmagic_tip: List[str] = ["奶龙已生成~{$checked_result}"]
-    nailongmagic_prompt: List[str] = ["nailong"]
+    nailongmagic_prompt: List[str] = ["nailong,8k"]
 
     nailongmagic_cache_dir: Path = Field(
         default_factory=lambda: Path.cwd() / "data" / "nailongmagic",

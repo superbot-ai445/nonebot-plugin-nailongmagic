@@ -6,7 +6,7 @@ from nonebot import logger, on_message
 from nonebot.adapters import Bot as BaseBot, Event as BaseEvent
 from nonebot.permission import SUPERUSER
 from nonebot.rule import Rule
-from nonebot_plugin_alconna.uniseg import UniMessage, UniMsg,Text
+from nonebot_plugin_alconna.uniseg import UniMessage, UniMsg,Text,Reply
 from nonebot_plugin_uninfo import QryItrface, Uninfo
 
 from .config import config
@@ -54,12 +54,25 @@ async def handle_function(bot: BaseBot, ev: BaseEvent, msg: UniMsg, session: Uni
             prompt = prompt.group(1) if prompt is not None else config.nailongmagic_prompt[random.randint(0, len(config.nailongmagic_prompt) - 1)]
             break
     if prompt is not None:
-        async for source, seg in iter_sources_in_message(msg):
-            try:
-                check_res = await check(source,prompt)
-            except Exception:
-                logger.exception(f"Failed to check {seg!r}")
-                continue
+        check_res=[]
+        async for source, seg in iter_sources_in_message(msg,solve_at=True):
+            if type(source) is Reply:
+                msg_r=await UniMsg.generate(message=source.msg)
+                async for source_r, seg_r in iter_sources_in_message(msg_r, solve_at=False):
+                    try:
+                        check_re = await check(source_r, prompt)
+                    except Exception:
+                        logger.exception(f"Failed to check {seg!r}")
+                        continue
+                    check_res.append(check_re)
+            else:
+                try:
+                    check_re = await check(source,prompt)
+                except Exception:
+                    logger.exception(f"Failed to check {seg!r}")
+                    continue
+                check_res.append(check_re)
+        if len(check_res) > 0:
             template_str_all = config.nailongmagic_tip
             template_str = template_str_all[
                 random.randint(0, len(template_str_all) - 1)
