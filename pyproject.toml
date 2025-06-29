@@ -25,8 +25,8 @@ readme = "README.md"
 keywords = ["nonebot", "plugin", "image"]
 
 [project.urls]
-homepage = "https://github.com/Refound-445/nonebot-plugin-nailongmagic"
-repository = "https://github.com/Refound-445/nonebot-plugin-nailongmagic"
+homepage = "https://github.com/superbot-ai445/nonebot-plugin-nailongmagic"
+repository = "https://github.com/superbot-ai445/nonebot-plugin-nailongmagic"
 
 [build-system]
 requires = ["pdm-backend"]
