@@ -1,5 +1,3 @@
-# ruff: noqa: E402
-
 from nonebot import get_plugin_config, require
 from nonebot.plugin import PluginMetadata, inherit_supported_adapters
 
@@ -15,7 +13,7 @@ __plugin_meta__ = PluginMetadata(
     description="世界就是一个巨大的奶龙~",
     usage="发送变奶龙+[图片]就会把目标变成奶龙",
     type="application",
-    homepage="https://github.com/Refound-445/nonebot-plugin-nailongmagic",
+    homepage="https://github.com/superbot-ai445/nonebot-plugin-nailongmagic",
     config=Config,
     supported_adapters=inherit_supported_adapters(
         "nonebot_plugin_alconna",
